@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Cute Little World 🎀</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap');
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#ffd6e8,#e7c6ff,#cdb4db);
+  font-family:'Poppins',sans-serif;
+  overflow:hidden;
+}
+
+/* ✨ Floating Sparkles */
+.sparkles{
+  position:fixed;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  background-image: radial-gradient(white 2px, transparent 2px);
+  background-size:80px 80px;
+  animation: sparkle 5s linear infinite;
+  opacity:0.4;
+}
+
+@keyframes sparkle{
+  from{transform:translateY(0);}
+  to{transform:translateY(-80px);}
+}
+
+/* 🎀 Intro */
+.intro{
+  position:fixed;
+  inset:0;
+  background:linear-gradient(135deg,#ffb3c6,#ffc8dd);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  z-index:5;
+  transition:1s;
+}
+
+.intro h1{
+  font-family:'Pacifico',cursive;
+  font-size:42px;
+  margin-bottom:20px;
+}
+
+.intro button{
+  padding:12px 28px;
+  border:none;
+  border-radius:30px;
+  background:white;
+  color:#ff5d8f;
+  font-size:18px;
+  cursor:pointer;
+  box-shadow:0 8px 20px rgba(0,0,0,0.2);
+  transition:0.3s;
+}
+
+.intro button:hover{
+  transform:scale(1.1);
+}
+
+/* 💖 Carousel */
+.carousel{
+  position:relative;
+  width:85%;
+  max-width:1000px;
+  height:500px;
+  overflow:hidden;
+  border-radius:30px;
+  box-shadow:0 25px 60px rgba(0,0,0,0.4);
+  background:#fff;
+  opacity:0;
+  transform:scale(0.95);
+  transition:1s ease;
+}
+
+.carousel.show{
+  opacity:1;
+  transform:scale(1);
+}
+
+.slides{
+  display:flex;
+  height:100%;
+  transition:transform 0.8s ease-in-out;
+}
+
+.slide{
+  min-width:100%;
+  height:100%;
+  position:relative;
+}
+
+.slide img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:30px;
+}
+
+/* 🌸 Caption */
+.caption{
+  position:absolute;
+  bottom:40px;
+  left:50%;
+  transform:translateX(-50%);
+  color:white;
+  font-size:24px;
+  font-weight:600;
+  text-align:center;
+  padding:14px 28px;
+  border-radius:30px;
+  backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.15);
+  border:1px solid rgba(255,255,255,0.3);
+  box-shadow:0 8px 25px rgba(0,0,0,0.3);
+  animation:fadeUp 1.2s ease;
+}
+
+@keyframes fadeUp{
+  from{opacity:0; transform:translate(-50%,40px);}
+  to{opacity:1; transform:translate(-50%,0);}
+}
+
+/* 💅 Buttons */
+.btn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(255,255,255,0.25);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,0.4);
+  color:white;
+  font-size:22px;
+  padding:16px 20px;
+  cursor:pointer;
+  border-radius:50%;
+  box-shadow:0 10px 30px rgba(255,105,180,0.4);
+  transition:all 0.3s ease;
+}
+
+.btn:hover{
+  transform:translateY(-50%) scale(1.15);
+  box-shadow:0 15px 40px rgba(255,105,180,0.6);
+}
+
+.prev{left:20px;}
+.next{right:20px;}
+
+/* 🎵 Music Button */
+.music-btn{
+  position:absolute;
+  top:20px;
+  right:20px;
+  background:#ffc8dd;
+  border:none;
+  padding:8px 14px;
+  border-radius:20px;
+  color:#ff5d8f;
+  cursor:pointer;
+  font-weight:600;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* 💕 Dots */
+.dots{
+  position:absolute;
+  bottom:20px;
+  width:100%;
+  text-align:center;
+}
+
+.dot{
+  display:inline-block;
+  width:12px;
+  height:12px;
+  margin:0 6px;
+  background:#ffc8dd;
+  border-radius:50%;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.dot.active{
+  width:26px;
+  border-radius:20px;
+  background:#ff5d8f;
+}
+
+@media(max-width:768px){
+  .carousel{height:300px;}
+  .caption{font-size:18px;}
+}
+
+/* 🦋 Floating Butterflies */
+.butterflies{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:0;
+}
+
+.butterflies span{
+  position:absolute;
+  bottom:-50px;
+  font-size:30px;
+  animation: flyUp linear infinite;
+  opacity:0.8;
+}
+
+/* Different positions & speeds */
+.butterflies span:nth-child(1){
+  left:10%;
+  animation-duration:12s;
+}
+.butterflies span:nth-child(2){
+  left:25%;
+  animation-duration:15s;
+  font-size:24px;
+}
+.butterflies span:nth-child(3){
+  left:40%;
+  animation-duration:18s;
+}
+.butterflies span:nth-child(4){
+  left:60%;
+  animation-duration:14s;
+  font-size:26px;
+}
+.butterflies span:nth-child(5){
+  left:75%;
+  animation-duration:16s;
+}
+.butterflies span:nth-child(6){
+  left:90%;
+  animation-duration:13s;
+  font-size:22px;
+}
+
+@keyframes flyUp{
+  0%{
+    transform:translateY(0) translateX(0) rotate(0deg);
+  }
+  25%{
+    transform:translateY(-25vh) translateX(20px) rotate(10deg);
+  }
+  50%{
+    transform:translateY(-50vh) translateX(-20px) rotate(-10deg);
+  }
+  75%{
+    transform:translateY(-75vh) translateX(15px) rotate(5deg);
+  }
+  100%{
+    transform:translateY(-110vh) translateX(-10px) rotate(-5deg);
+  }
+}
+
+/* ✨ Glitter Particle */
+.glitter {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, white 0%, #ffd6ff 40%, transparent 70%);
+  pointer-events: none;
+  animation: sparkleFade 1s linear forwards;
+  z-index: 1;
+}
+
+@keyframes sparkleFade {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+}
+
+.slide img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:30px;
+  transition: transform 6s ease;
+}
+
+.slide.active img{
+  transform: scale(1.08);
+}
+
+.progress-bar{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:5px;
+  background:rgba(255,255,255,0.3);
+}
+
+.progress{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#ff5d8f,#ffc8dd);
+  transition:width 4s linear;
+}
+</style>
+</head>
+
+<body>
+
+<div class="butterflies">
+  <span>🦋</span>
+  <span>🦋</span>
+  <span>🦋</span>
+  <span>🦋</span>
+  <span>🦋</span>
+  <span>🦋</span>
+</div>
+
+<div class="sparkles"></div>
+
+<div class="intro" id="intro">
+  <h1>Welcome to My Cute Space 🎀</h1>
+  <button onclick="startExperience()">Enter 💖</button>
+</div>
+
+<div class="carousel" id="carousel">
+  
+  <button class="music-btn" onclick="toggleMusic()">🎵 Music</button>
+
+  <div class="slides" id="slides">
+    <div class="slide">
+      <img src="1.jpg">
+      <div class="caption">Living my soft girl era ✨</div>
+    </div>
+    <div class="slide">
+      <img src="2.jpg">
+      <div class="caption">Pretty in pink 💕</div>
+    </div>
+    <div class="slide">
+      <img src="3.jpg">
+      <div class="caption">Sparkle wherever you go 🌸</div>
+    </div>
+    <div class="slide">
+      <img src="4.jpg">
+      <div class="caption">Stay cute, stay confident 💅</div>
+    </div>
+  </div>
+
+  <button class="btn prev" onclick="prevSlide()">❮</button>
+  <button class="btn next" onclick="nextSlide()">❯</button>
+
+  <div class="dots" id="dots"></div>
+</div>
+
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="progress-bar">
+  <div class="progress"></div>
+</div>
+
+<script>
+const slidesContainer = document.getElementById('slides');
+const slides = document.querySelectorAll('.slide');
+const dotsContainer = document.getElementById('dots');
+const carousel = document.getElementById('carousel');
+
+let index = 1;
+let autoSlide;
+let isTransitioning = false;
+
+/* 🦋 Clone First & Last Slide (Infinite Loop Effect) */
+const firstClone = slides[0].cloneNode(true);
+const lastClone = slides[slides.length - 1].cloneNode(true);
+
+slidesContainer.appendChild(firstClone);
+slidesContainer.insertBefore(lastClone, slides[0]);
+
+const allSlides = document.querySelectorAll('.slide');
+slidesContainer.style.transform = `translateX(-100%)`;
+
+/* 💖 Show Slide */
+function showSlide(i) {
+  if (isTransitioning) return;
+  isTransitioning = true;
+  resetProgress();
+
+  slidesContainer.style.transition = "transform 0.9s cubic-bezier(.77,0,.18,1)";
+  slidesContainer.style.transform = `translateX(-${i * 100}%)`;
+  allSlides.forEach(slide => slide.classList.remove("active"));
+  allSlides[index].classList.add("active");
+  index = i;
+
+  updateDots();
+
+  setTimeout(() => {
+    if (index === 0) {
+      slidesContainer.style.transition = "none";
+      index = allSlides.length - 2;
+      slidesContainer.style.transform = `translateX(-${index * 100}%)`;
+    }
+
+    if (index === allSlides.length - 1) {
+      slidesContainer.style.transition = "none";
+      index = 1;
+      slidesContainer.style.transform = `translateX(-100%)`;
+    }
+
+    isTransitioning = false;
+  }, 800);
+}
+
+function nextSlide() {
+  showSlide(index + 1);
+}
+
+function prevSlide() {
+  showSlide(index - 1);
+}
+
+/* ✨ Animated Dots */
+function createDots() {
+  for (let i = 0; i < slides.length; i++) {
+    const dot = document.createElement('span');
+    dot.classList.add('dot');
+    if (i === 0) dot.classList.add('active');
+
+    dot.addEventListener('click', () => {
+      showSlide(i + 1);
+    });
+
+    dotsContainer.appendChild(dot);
+  }
+}
+
+const progress = document.querySelector('.progress');
+
+function resetProgress(){
+  progress.style.transition = "none";
+  progress.style.width = "0%";
+  setTimeout(()=>{
+    progress.style.transition = "width 4s linear";
+    progress.style.width = "100%";
+  },50);
+}
+
+function startExperience() {
+  const intro = document.getElementById('intro');
+  const carousel = document.getElementById('carousel');
+  const music = document.getElementById('bgMusic');
+
+  // Hide intro
+  intro.style.opacity = '0';
+  intro.style.pointerEvents = 'none';
+  setTimeout(() => {
+    intro.style.display = 'none';
+  }, 1000);
+
+  // Show carousel
+  carousel.classList.add('show');
+
+  // Play music
+  music.play().catch(err => {
+    console.log("Music playback blocked:", err);
+  });
+}
+
+function updateDots() {
+  const dots = document.querySelectorAll('.dot');
+  dots.forEach(dot => dot.classList.remove('active'));
+
+  let realIndex = index - 1;
+  if (realIndex < 0) realIndex = slides.length - 1;
+  if (realIndex >= slides.length) realIndex = 0;
+
+  dots[realIndex].classList.add('active');
+}
+
+/* 🌸 Auto Slide */
+function startAutoSlide() {
+  autoSlide = setInterval(nextSlide, 4000);
+  resetProgress();
+}
+
+function stopAutoSlide() {
+  clearInterval(autoSlide);
+}
+
+carousel.addEventListener('mouseenter', stopAutoSlide);
+carousel.addEventListener('mouseleave', startAutoSlide);
+
+/* 📱 Swipe Support */
+let startX = 0;
+
+carousel.addEventListener("touchstart", e => {
+  startX = e.touches[0].clientX;
+});
+
+carousel.addEventListener("touchend", e => {
+  let endX = e.changedTouches[0].clientX;
+
+  if (startX - endX > 50) nextSlide();
+  if (endX - startX > 50) prevSlide();
+});
+
+/* ⌨ Keyboard Support */
+document.addEventListener("keydown", e => {
+  if (e.key === "ArrowRight") nextSlide();
+  if (e.key === "ArrowLeft") prevSlide();
+});
+
+/* 💖 Init */
+createDots();
+startAutoSlide();
+allSlides[index].classList.add("active");
+resetProgress();
+</script>
+
+</body>
+</html>
